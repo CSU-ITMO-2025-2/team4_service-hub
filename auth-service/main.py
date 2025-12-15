@@ -2,10 +2,11 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 import jwt
 import datetime
+import os
 
 app = FastAPI()
 
-SECRET = "SUPER_SECRET_KEY"
+SECRET = os.getenv("JWT_SECRET", "dev-secret")
 ALGORITHM = "HS256"
 
 security = HTTPBearer()
