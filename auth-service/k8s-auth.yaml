@@ -21,6 +21,7 @@ spec:
       labels:
         app: auth
     spec:
+      serviceAccountName: auth-service-sa
       containers:
       - name: auth-container
         image: auth-service:dev
@@ -32,6 +33,13 @@ spec:
             secretKeyRef:
               name: auth-secret
               key: JWT_SECRET
+        resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
 ---
 apiVersion: v1
 kind: Service
