@@ -27,6 +27,23 @@ spec:
         image: auth-service:dev
         ports:
         - containerPort: 8000
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 20
+          timeoutSeconds: 2
+          periodSeconds: 10
+
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
+          periodSeconds: 5
+
         env:
         - name: JWT_SECRET
           valueFrom:
